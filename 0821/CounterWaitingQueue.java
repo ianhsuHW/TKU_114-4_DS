@@ -1,8 +1,28 @@
 import java.util.ArrayDeque;
 import java.util.Deque;
 
-// Customer 定義在同資料夾的 Customer.java，本檔直接使用。
+class Customer {
+    private String id;
+    private String name;
 
+    Customer(String id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
+    String getId() {
+        return id;
+    }
+
+    String getName() {
+        return name;
+    }
+
+    @Override
+    public String toString() {
+        return id + " " + name;
+    }
+}
 class CounterQueue {
     private Deque<Customer> waiting = new ArrayDeque<>();
 

@@ -54,16 +54,6 @@ Java 物件導向複習與封裝
 | `AccountTransferService.java` | 四：跨帳戶轉帳服務 |
 | `WalletHistoryManager.java` | 五：電子錢包交易系統擴充 |
 
-## 共用類別檔
-
-以下類別同時被概念範例與作業使用，為避免同一資料夾內重複宣告，各自獨立成一個檔案：
-
-| 檔案 | 使用者 |
-|---|---|
-| `Customer.java` | `OrderCompositionDemo.java`（概念 6）、`CustomerOrderSystem.java`（作業二） |
-| `WalletTransaction.java` | `WalletTransactionSystem.java`（概念 12）、`DigitalWallet.java` |
-| `DigitalWallet.java` | `WalletTransactionSystem.java`（概念 12）、`DigitalWalletSystem.java`（作業一） |
-
 ## 編譯與執行
 
 整包編譯：

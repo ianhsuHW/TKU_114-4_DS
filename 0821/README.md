@@ -56,12 +56,6 @@ List、Stack、Queue 與集合實作比較
 | `LinkedTaskListSystem.java` | 五：單向鏈結清單 |
 | `ServiceCenterWorkflow.java` | 六：服務中心排隊與取消 |
 
-## 共用類別檔
-
-| 檔案 | 使用者 |
-|---|---|
-| `Customer.java` | `CounterWaitingQueue.java`（實作題三）管理 `Deque<Customer>` 用的資料類別 |
-
 ## 編譯與執行
 
 整包編譯：
