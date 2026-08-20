@@ -1,17 +1,4 @@
-class Customer {
-    private String id;
-    private String name;
-
-    Customer(String id, String name) {
-        this.id = id;
-        this.name = name;
-    }
-
-    String label() {
-        return id + " " + name;
-    }
-}
-
+// Customer 定義在同資料夾的 Customer.java，本檔直接使用。
 class Order {
     private String orderId;
     private Customer customer;

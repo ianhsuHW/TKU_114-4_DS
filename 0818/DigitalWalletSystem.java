@@ -1,56 +1,66 @@
-final class WalletTransaction {
-    private final int sequence;
-    private final String type;
-    private final int amount;
-    private final int balanceAfter;
-
-    WalletTransaction(int sequence, String type, int amount, int balanceAfter) {
-        this.sequence = sequence;
-        this.type = type;
-        this.amount = amount;
-        this.balanceAfter = balanceAfter;
-    }
-
-    @Override public String toString() { return sequence + " " + type + " " + amount + " balance=" + balanceAfter; }
-}
-
-class DigitalWallet {
-    private String walletId;
-    private int balance;
-    private WalletTransaction[] history;
-    private int count;
-
-    DigitalWallet(String walletId, int capacity) {
-        this.walletId = walletId;
-        this.balance = 0;
-        this.history = new WalletTransaction[Math.max(1, capacity)];
-    }
-
-    boolean deposit(int amount) {
-        if (amount <= 0 || count >= history.length) return false;
-        balance += amount;
-        history[count++] = new WalletTransaction(count, "DEPOSIT", amount, balance);
-        return true;
-    }
-
-    boolean pay(int amount) {
-        if (amount <= 0 || amount > balance || count >= history.length) return false;
-        balance -= amount;
-        history[count++] = new WalletTransaction(count, "PAY", amount, balance);
-        return true;
-    }
-
-    int getBalance() { return balance; }
-    void printHistory() { for (int i = 0; i < count; i++) System.out.println(history[i]); }
-}
+// DigitalWallet 與 WalletTransaction 定義在同資料夾的
+// DigitalWallet.java 與 WalletTransaction.java，本檔直接使用。
 
 public class DigitalWalletSystem {
     public static void main(String[] args) {
-        DigitalWallet wallet = new DigitalWallet("W-01", 5);
-        System.out.println(wallet.deposit(1000));
-        System.out.println(wallet.pay(200));
-        System.out.println(wallet.pay(2000));
-        System.out.println(wallet.getBalance());
-        wallet.printHistory();
+        DigitalWallet wallet = new DigitalWallet("W001", "Amy", 20);
+        System.out.println("初始：" + wallet);
+
+        System.out.println();
+        System.out.println("=== 1. 正常儲值 ===");
+        System.out.println("deposit(1000)：" + wallet.deposit(1000));
+        System.out.println(wallet);
+
+        System.out.println();
+        System.out.println("=== 2. 正常付款 ===");
+        System.out.println("pay(250)：" + wallet.pay(250));
+        System.out.println(wallet);
+
+        System.out.println();
+        System.out.println("=== 3. 餘額不足 ===");
+        int beforeBalance = wallet.getBalance();
+        int beforeCount = wallet.getTransactionCount();
+        System.out.println("pay(9999)：" + wallet.pay(9999));
+        System.out.println(wallet);
+        System.out.println("餘額未改變：" + (wallet.getBalance() == beforeBalance));
+        System.out.println("交易次數未改變：" + (wallet.getTransactionCount() == beforeCount));
+
+        System.out.println();
+        System.out.println("=== 4. 負數與零金額 ===");
+        beforeBalance = wallet.getBalance();
+        beforeCount = wallet.getTransactionCount();
+        System.out.println("deposit(-500)：" + wallet.deposit(-500));
+        System.out.println("pay(-100)：" + wallet.pay(-100));
+        System.out.println("pay(0)：" + wallet.pay(0));
+        System.out.println("refund(-50)：" + wallet.refund(-50));
+        System.out.println(wallet);
+        System.out.println("餘額未改變：" + (wallet.getBalance() == beforeBalance));
+        System.out.println("交易次數未改變：" + (wallet.getTransactionCount() == beforeCount));
+
+        System.out.println();
+        System.out.println("=== 5. 退款 ===");
+        System.out.println("refund(100)：" + wallet.refund(100));
+        System.out.println(wallet);
+
+        System.out.println();
+        System.out.println("=== 交易明細 ===");
+        wallet.printStatement();
+
+        System.out.println();
+        System.out.println("=== 交易紀錄已滿時不得改變餘額 ===");
+        DigitalWallet small = new DigitalWallet("W002", "Ben", 2);
+        System.out.println("deposit(500)：" + small.deposit(500));
+        System.out.println("deposit(300)：" + small.deposit(300));
+        System.out.println("historyFull：" + small.isHistoryFull());
+        int smallBefore = small.getBalance();
+        System.out.println("deposit(100)（已滿）：" + small.deposit(100));
+        System.out.println("pay(100)（已滿）：" + small.pay(100));
+        System.out.println("餘額未改變：" + (small.getBalance() == smallBefore));
+        System.out.println(small);
+
+        System.out.println();
+        System.out.println("=== 欄位驗證 ===");
+        DigitalWallet other = new DigitalWallet("", "  ", 5);
+        System.out.println(other);
     }
 }
