@@ -1,4 +1,4 @@
-// Customer 定義在同資料夾的 Customer.java，本檔直接使用。
+// Customer 已定義於同資料夾的 OrderCompositionDemo.java（概念 6），本檔直接使用。
 
 class OrderItem {
     private String productName;
@@ -74,7 +74,7 @@ class CustomerOrder {
 
     void printSummary() {
         System.out.println("訂單編號：" + orderId);
-        System.out.println("顧客：" + customer);
+        System.out.println("顧客：" + customer.label());
         System.out.println("品項（" + itemCount + " 筆）：");
         for (int i = 0; i < itemCount; i++) {
             System.out.println("  " + items[i]);
@@ -86,14 +86,14 @@ class CustomerOrder {
 
 public class CustomerOrderSystem {
     public static void main(String[] args) {
-        Customer amy = new Customer("C101", "Amy", "0912-345-678");
+        Customer amy = new Customer("C101", "Amy");
         CustomerOrder order = new CustomerOrder("O9001", amy, 3);
 
         System.out.println("=== 加入品項 ===");
         System.out.println("addItem 滑鼠：" + order.addItem(new OrderItem("無線滑鼠", 690, 2)));
         System.out.println("addItem 鍵盤：" + order.addItem(new OrderItem("機械鍵盤", 2480, 1)));
         System.out.println("addItem 螢幕：" + order.addItem(new OrderItem("27 吋螢幕", 5990, 1)));
-        System.out.println("addItem 音響（已滿）：" + order.addItem(new OrderItem("喇叭", 1200, 1)));
+        System.out.println("addItem 喇叭（已滿）：" + order.addItem(new OrderItem("喇叭", 1200, 1)));
         System.out.println("addItem null：" + order.addItem(null));
         System.out.println("實際品項數：" + order.getItemCount());
 
@@ -110,7 +110,13 @@ public class CustomerOrderSystem {
                 + (order.getCustomer() == second.getCustomer()));
 
         System.out.println();
+        System.out.println("=== 邊界值 ===");
+        CustomerOrder invalid = new CustomerOrder("O9003", new Customer("C102", "Ben"), 2);
+        invalid.addItem(new OrderItem("負數測試", -100, -5));
+        invalid.printSummary();
+
+        System.out.println();
         System.out.println("Composition 說明：CustomerOrder 只保存一個 Customer reference");
-        System.out.println("與一個 OrderItem[]，沒有把顧客與品項拆成平行陣列。");
+        System.out.println("與一個固定長度的 OrderItem[]，沒有把顧客與品項拆成平行陣列。");
     }
 }

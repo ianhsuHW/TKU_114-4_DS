@@ -58,7 +58,50 @@ class Repository<T> {
     }
 }
 
-// Product 定義在同資料夾的 Product.java，本檔直接使用。
+class Product {
+    private final String id;
+    private final String name;
+    private final int price;
+
+    Product(String id, String name, int price) {
+        this.id = id;
+        this.name = name;
+        this.price = Math.max(0, price);
+    }
+
+    String getId() {
+        return id;
+    }
+
+    String getName() {
+        return name;
+    }
+
+    int getPrice() {
+        return price;
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (this == other) {
+            return true;
+        }
+        if (!(other instanceof Product)) {
+            return false;
+        }
+        return id.equals(((Product) other).id);
+    }
+
+    @Override
+    public int hashCode() {
+        return id.hashCode();
+    }
+
+    @Override
+    public String toString() {
+        return id + " " + name + " $" + price;
+    }
+}
 
 public class GenericRepositorySystem {
     public static void main(String[] args) {

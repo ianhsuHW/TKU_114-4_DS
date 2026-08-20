@@ -54,12 +54,6 @@
 | `EnrollmentSetSystem.java` | 四：課程報名身分集合 |
 | `CourseCollectionManager.java` | 五：課程管理集合系統 |
 
-## 共用類別檔
-
-| 檔案 | 使用者 |
-|---|---|
-| `Product.java` | `GenericRepositorySystem.java`（作業一）測試 `Repository<Product>` 用的資料類別 |
-
 ## 編譯與執行
 
 整包編譯：
