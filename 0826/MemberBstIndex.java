@@ -155,6 +155,8 @@ public class MemberBstIndex {
                 + index.add(new Member(2008, "Ivy", "ivy@example.com")));
         System.out.println("add 4500="
                 + index.add(new Member(4500, "Ken", "ken@example.com")));
+        System.out.println("add 1500="
+                + index.add(new Member(1500, "Rex", "rex@example.com")));
 
         System.out.println("duplicate 1002="
                 + index.add(new Member(1002, "Copy", "copy@example.com")));
@@ -176,7 +178,7 @@ public class MemberBstIndex {
         System.out.println("updateEmail missing="
                 + index.updateEmail(9999, "x@example.com"));
 
-        System.out.println("remove leaf 1002=" + index.remove(1002));
+        System.out.println("remove leaf 1500=" + index.remove(1500));
         System.out.println("remove one-child 4100=" + index.remove(4100));
         System.out.println("remove two-children 3005=" + index.remove(3005));
         System.out.println("remove missing 9999=" + index.remove(9999));
